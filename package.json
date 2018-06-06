@@ -1,0 +1,25 @@
+{
+  "name": "eos-local-voter",
+  "version": "1.0.0",
+  "description": "A local EOS voting portal.",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/EOSLaoMao/eos-local-voter.git"
+  },
+  "keywords": [
+    "eos"
+  ],
+  "author": "zhaoyu@docodemo.com, wangqianyi@docodemo.com",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/EOSLaoMao/eos-local-voter/issues"
+  },
+  "homepage": "https://github.com/EOSLaoMao/eos-local-voter#readme",
+  "dependencies": {
+    "eosjs": "^14.1.0"
+  }
+}
