@@ -24,7 +24,7 @@ https://nodejs.org/en/
 
 ### 1. Clone this project and run
 
-`
+```
 git clone https://github.com/EOSLaoMao/eos-local-voter.git
 
 cd eos-local-voter
@@ -32,7 +32,7 @@ cd eos-local-voter
 npm install
 
 npm start
-`
+```
 
 When the local server up and running, it will automatically open the browser for you!
 
