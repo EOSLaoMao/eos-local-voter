@@ -9,7 +9,7 @@ html
     div(class="column is-half is-offset-one-quarter")
       nav(class="navbar")
         div(class="navbar-brand")
-          h1(class="title")= title
+          h1(class="title" style="margin-top: 20px;")= title
 
       hr
       form(class="form-config"
@@ -62,10 +62,21 @@ html
             p(id="account"
               class="account has-text-black is-size-5")
 
+        div.field
+          label(for='token') Staked tokens:
+          div.control
+            p(id="token"
+              class="token has-text-black is-size-5")
+
+        div.field
+          label(for='producers') Producers you voted for:
+          div.control
+            p(id="producers"
+              class="producers has-text-black is-size-5")
+
         div.control
           a(class='button is-size-6', href='javascript:;' id="btn-edit") update
 
-          
       hr
       form(class="form-vote"
            id="form-vote")
@@ -83,6 +94,7 @@ html
           label(for='secretKey') secretKey:
           div.control
           textarea(type="text"
+                   visibility="hidden"
                    class="textarea"
                    name="secretKey")
 
