@@ -1,5 +1,6 @@
 var settingAPI = '/api/setting';
 var votingAPI = '/api/voting';
+var accountAPI = '/api/account';
 
 $.ajax({
   url: settingAPI,
@@ -19,8 +20,30 @@ $.ajax({
   }
 })
 
+function updateAccount() {
+  $.ajax({
+    url: accountAPI,
+    statusCode: {
+      200: function(res) {
+        console.log(res);
+        console.log(res['delegated_bandwidth'])
+        console.log(res['voter_info']['producers'])
+        var delegated = res['delegated_bandwidth']
+        var from = delegated['from']
+        var to = delegated['to']
+        var staking = [from, " --> ", to, ' CPU:', delegated['cpu_weight'], ' NET:', delegated['net_weight']];
+        $('p.token').text(staking.join(' '));
+        $('p.producers').text(res['voter_info']['producers'].join(' '));
+        
+      },
+      404: function(res) {
+        console.log('failed', res);
+      }
+    }
+  })
+}
+
 function renderConfig(res) {
-  console.log(23, res);
 
   $('p.httpEndpoint').text(res.httpEndpoint);
   $('p.chainId').text(res.chainId);
@@ -29,6 +52,7 @@ function renderConfig(res) {
   $('input.httpEndpoint').val(res.httpEndpoint);
   $('input.chainId').val(res.chainId);
   $('input.account').val(res.account);
+  updateAccount();
 }
 
 function formDataToObject(form) {

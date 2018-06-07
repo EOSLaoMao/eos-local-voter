@@ -17,7 +17,7 @@ router.post('/', async (req, res, next) => {
     const votingCtl = new VotingCtl(EOS(config));
     if (_.isEmpty(data.proxy)) data.proxy = "";
     let producers = [];
-    data.producers.split(',').forEach(function (prod) {
+    data.producers.split(' ').forEach(function (prod) {
       console.log('prod', prod);
       producers.push(prod.trim())
     });
