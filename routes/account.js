@@ -15,7 +15,7 @@ router.get('/', async (req, res, next) => {
     const accountCtl = new AccountCtl(eos);
     const result = await accountCtl.getInfo(account);
     if (_.isEmpty(result)) throw new Error('account is not exist.');
-    res.send(JSON.stringify(result));
+    res.send(result);
   } catch (error) {
     next(error)
   }
