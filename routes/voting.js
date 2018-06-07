@@ -1,5 +1,8 @@
 const express = require('express');
 const EOS = require('eosjs');
+const VotingCtl = require('../controllers/votingController');
+const _ = require('lodash')
+
 const router = express.Router();
 
 router.post('/', async (req, res, next) => {
@@ -9,24 +12,18 @@ router.post('/', async (req, res, next) => {
     keyProvider: [data.secretKey],
     chainId: data.chainId,
   }
+
   const eos = EOS(eosConfig);
+  const votingCtl = new VotingCtl(eos);
   try {
-    const result = await stake(eos, data.netToUnstake, data.cpuToUnstake, data.account);
-    if (result !== null) res.sendStatus(200);
+    if (_.isEmpty(data.proxy)) data.proxy = "";
+    const result = await votingCtl.vote(data.account, data.producers, data.proxy);
+    if (!_.isEmpty(reuslt)) res.sendStatue(200);
     console.log(result);
-  } catch (e) {
-    next(e);
+  } catch (error) {
+    next(error)
   }
 });
 
-async function stake(eos, netToUnstake, cpuToUnstake, account) {
-  return await eos.transaction(tr => {
-    tr.undelegatebw({
-      from: account,
-      receiver: account,
-      unstake_net_quantity: netToUnstake,
-      unstake_cpu_quantity: cpuToUnstake,
-    })
-  })
-}
+
 module.exports = router;
