@@ -2,78 +2,92 @@ doctype html
 html
   head
     title= title
-    link(rel='stylesheet', href='/stylesheets/style.css')
-  body
-    block content
-    h1= title
+    link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.1/css/bulma.css')
+    link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.1/css/bulma.css.map')
 
-    form(class="form-config"
-         id="form-config")
-      p Specify the voting portal and voter account
+  body(class="columns")
+    div(class="column is-half is-offset-one-quarter")
+      nav(class="navbar")
+        div(class="navbar-brand")
+          h1(class="title")= title
 
-      div.form-group
-        p(for='httpEndpoint') HTTP Endpoint:
-        input(type="text"
-              class="httpEndpoint"
-              name="httpEndpoint")
+      hr
+      form(class="form-config"
+           id="form-config")
+        p(class="is-size-5 has-text-centered") Voting portal & voter account
 
-      div.form-group
-        p(for='chainId') ChainId:
-        input(type="text"
-              class="chainId"
-              name="chainId")
+        div.field
+          label(for='httpEndpoint') HTTP Endpoint:
+          div.control
+            input(type="text"
+                  class="httpEndpoint input is-size-5"
+                  name="httpEndpoint")
 
-      div.form-group
-        p(for='account') Account:
-        input(type="text"
-              class="account"
-              name="account")
+        div.field
+          label(for='chainId') ChainId:
+          div.control
+            input(type="text"
+                  class="chainId input is-size-5"
+                  name="chainId")
 
-      div.form-group
-        a(class='button', href='javascript:;' id="btn-save") Save
+        div.field
+          label(for='account') Account:
+          div.control
+            input(type="text"
+                  class="account input is-size-5"
+                  name="account")
 
-
-
-    div(id="config-container")
-      p Voting portal and voter account specified
-
-      div.form-group
-        label(for='httpEndpoint') HTTP Endpoint:
-        p(id="httpEndpoint",
-          class="httpEndpoint")
-
-      div.form-group
-        label(for='chainId') ChainId:
-        p(id="chainId",
-          class="chainId")
-
-      div.form-group
-        label(for='account') Account:
-        p(id="account"
-          class="account")
-
-      div.form-group
-        a(class='button', href='javascript:;' id="btn-edit") Edit
+        div.control
+          a(class='button is-dark', href='javascript:;' id="btn-save") Save
 
 
+      div(id="config-container")
+        p(class="is-size-5 has-text-centered") Voting portal & voter account
 
-    form(class="form-vote"
-         id="form-vote")
-      p Specify the producers you want to vote for
+        div.field
+          label(for='httpEndpoint') HTTP Endpoint:
+          div.control
+            p(id="httpEndpoint",
+              class="httpEndpoint has-text-black is-size-5")
 
-      div.form-group
-        p(for='producers') Producers(seperate by space):
-        textarea(type="text"
-                 name="producers")
+        div.field
+          label(for='chainId') ChainId:
+          div.control
+            p(id="chainId",
+              class="chainId has-text-black is-size-5")
 
-      div.form-group
-        p(for='secretKey') secretKey:
-        textarea(type="text"
-                 name="secretKey")
+        div.field
+          label(for='account') Account:
+          div.control
+            p(id="account"
+              class="account has-text-black is-size-5")
 
-      div.form-group
-        a(class='button', href='javascript:;' id="btn-vote") Vote
+        div.control
+          a(class='button is-size-6', href='javascript:;' id="btn-edit") update
 
+          
+      hr
+      form(class="form-vote"
+           id="form-vote")
+        p(class="is-size-5 has-text-centered") Specify the producers you want to vote for
+
+        div.field
+          label(for='producers') Producers(seperate by space):
+          div.control
+          textarea(type="text"
+                   class="textarea"
+                   placeholder="producer names seperated by space: producer1 producer2 producer3"
+                   name="producers")
+
+        div.field
+          label(for='secretKey') secretKey:
+          div.control
+          textarea(type="text"
+                   class="textarea"
+                   name="secretKey")
+
+        div.control
+          a(class='button is-primary', href='javascript:;' id="btn-vote") Vote!!
 
     script(src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js')
     script(src='/javascripts/index.js')
