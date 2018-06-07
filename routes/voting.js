@@ -1,8 +1,10 @@
 const express = require('express');
 const EOS = require('eosjs');
+const createError = require('http-errors');
+const _ = require('lodash')
+
 const utils = require('../utils');
 const VotingCtl = require('../controllers/votingController');
-const _ = require('lodash')
 
 const router = express.Router();
 
@@ -20,7 +22,8 @@ router.post('/', async (req, res, next) => {
       producers.push(prod.trim())
     });
     const result = await votingCtl.vote(account, producers, data.proxy);
-    if (!_.isEmpty(result)) res.send(JSON.stringify(result));
+    if (_.isEmpty(result)) throw createError(404);
+    res.send(JSON.stringify(result));
   } catch (error) {
     next(error)
   }
