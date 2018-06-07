@@ -12,15 +12,20 @@ readConfig = function() {
   return config;
 }
 
-let eos;
-try {
-  eos = EOS(readConfig());
-} catch(error) {
-  eos = undefined;
+getLocalIp = function() {
+    const os = require('os');
+
+    for(let addresses of Object.values(os.networkInterfaces())) {
+        for(let add of addresses) {
+            if(add.address.startsWith('192.168.')) {
+                return add.address;
+            }
+        }
+    }
 }
 
 module.exports = {
   writeConfig: writeConfig,
   readConfig: readConfig,
-  eos: eos,
+  getLocalIp: getLocalIp,
 };
