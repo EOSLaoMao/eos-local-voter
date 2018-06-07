@@ -7,8 +7,6 @@ const configFile = './config.json';
 const utils = require('../utils');
 const SetingCtl =
 
-
-
 router.post('/', async (req, res, next) => {
   const data = req.body;
   const eosConfig = {

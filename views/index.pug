@@ -7,7 +7,8 @@ html
     block content
     h1= title
 
-    form.form-config
+    form(class="form-config"
+         id="form-config")
       p Specify the voting portal and producers you vote for
 
       div.form-group
@@ -26,7 +27,25 @@ html
               name="account")
 
       div.form-group
-        a(class='button', href='javascript:;' id="btn-next") Next
+        a(class='button', href='javascript:;' id="btn-save") Save
+
+    form(class="form-vote"
+         id="form-vote")
+      p Specify the producers you want to vote for
+
+      div.form-group
+        label(for='producers') Producers(seperate by space):
+        input(type="text"
+              name="producers")
+
+      div.form-group
+        label(for='secretKey') secretKey:
+        input(type="text"
+              name="secretKey")
+
+      div.form-group
+        a(class='button', href='javascript:;' id="btn-vote") Vote
+
 
     script(src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js')
     script(src='/javascripts/index.js')

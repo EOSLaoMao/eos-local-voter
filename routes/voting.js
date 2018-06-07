@@ -1,5 +1,6 @@
 const express = require('express');
 const EOS = require('eosjs');
+const utils = require('../utils');
 const VotingCtl = require('../controllers/votingController');
 const _ = require('lodash')
 
@@ -7,19 +8,21 @@ const router = express.Router();
 
 router.post('/', async (req, res, next) => {
   const data = req.body;
-  const eosConfig = {
-    httpEndpoint: data.httpEndpoint,
-    keyProvider: [data.secretKey],
-    chainId: data.chainId,
-  }
-
-  const eos = EOS(eosConfig);
-  const votingCtl = new VotingCtl(eos);
+  let config = utils.readConfig();
+  const account = config['account'];
   try {
+    config['keyProvider'] = [data.secretKey];
+    const votingCtl = new VotingCtl(EOS(config));
     if (_.isEmpty(data.proxy)) data.proxy = "";
-    const result = await votingCtl.vote(data.account, data.producers, data.proxy);
-    if (!_.isEmpty(reuslt)) res.sendStatue(200);
-    console.log(result);
+    // let producers = data.producers.split(',');
+    let producers = [];
+    data.producers.split(',').forEach(function(prod){ 
+        console.log('aaaa', prod);
+        producers.push(prod.trim())
+    });
+    console.log(22, account, producers);
+    const result = await votingCtl.vote(account, producers, data.proxy);
+    if (!_.isEmpty(result)) res.send(JSON.stringify(result));
   } catch (error) {
     next(error)
   }
