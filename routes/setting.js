@@ -1,23 +1,36 @@
 const express = require('express');
+const fs = require('fs');
+const EOS = require('eosjs');
+const util = require('util')
 const router = express.Router();
-const SetingCtl = 
+const configFile = './config.json';
+const utils = require('../utils');
+const SetingCtl =
+
+
 
 router.post('/', async (req, res, next) => {
   const data = req.body;
   const eosConfig = {
     httpEndpoint: data.httpEndpoint,
-    keyProvider: [data.secretKey],
     chainId: data.chainId,
+    account: data.account,
   }
-  const eos = EOS(eosConfig);
-  try {
-    const result = await sendTransaction(eos, data.netToUnstake, data.cpuToUnstake, data.account);
-    if (result !== null) res.sendStatus(200);
-    console.log(result);
-  } catch (e) {
-    next(e);
-  }
+  console.log(eosConfig);
+  utils.writeConfig(eosConfig);
+  // const eos = EOS(eosConfig);
+  res.sendStatus(200)
 });
+
+router.get('/', async (req, res, next) => {
+  try {
+    config = utils.readConfig();
+    res.send(JSON.stringify(config));
+  }
+  catch(error) {
+    res.sendStatus(404)
+  }
+})
 
 async function sendTransaction(eos, netToUnstake, cpuToUnstake, account) {
   return await eos.transaction(tr => {

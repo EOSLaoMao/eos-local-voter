@@ -11,14 +11,14 @@ html
       p Specify the voting portal and producers you vote for
 
       div.form-group
-        label(for='end-point') Endpoint:
+        label(for='httpEndpoint') HTTP Endpoint:
         input(type="text"
-              name="end-point")
+              name="httpEndpoint")
 
       div.form-group
-        label(for='chainid') ChainId:
+        label(for='chainId') ChainId:
         input(type="text"
-              name="chainid")
+              name="chainId")
 
       div.form-group
         label(for='account') Account:
@@ -28,5 +28,5 @@ html
       div.form-group
         a(class='button', href='javascript:;' id="btn-next") Next
 
-    script(src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.slim.min.js')
+    script(src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js')
     script(src='/javascripts/index.js')
