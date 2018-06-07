@@ -5,7 +5,6 @@ const util = require('util')
 const router = express.Router();
 const configFile = './config.json';
 const utils = require('../utils');
-const SetingCtl =
 
 router.post('/', async (req, res, next) => {
   const data = req.body;
@@ -20,6 +19,7 @@ router.post('/', async (req, res, next) => {
 });
 
 router.get('/', async (req, res, next) => {
+  console.log('local ip:', utils.getLocalIp());
   try {
     config = utils.readConfig();
     res.send(config);
