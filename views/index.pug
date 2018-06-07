@@ -6,4 +6,27 @@ html
   body
     block content
     h1= title
-    p Welcome to #{title}
+
+    form.form-config
+      p Specify the voting portal and producers you vote for
+
+      div.form-group
+        label(for='end-point') Endpoint:
+        input(type="text"
+              name="end-point")
+
+      div.form-group
+        label(for='chainid') ChainId:
+        input(type="text"
+              name="chainid")
+
+      div.form-group
+        label(for='account') Account:
+        input(type="text"
+              name="account")
+
+      div.form-group
+        a(class='button', href='javascript:;' id="btn-next") Next
+
+    script(src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.slim.min.js')
+    script(src='/javascripts/index.js')
