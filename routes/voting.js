@@ -14,13 +14,11 @@ router.post('/', async (req, res, next) => {
     config['keyProvider'] = [data.secretKey];
     const votingCtl = new VotingCtl(EOS(config));
     if (_.isEmpty(data.proxy)) data.proxy = "";
-    // let producers = data.producers.split(',');
     let producers = [];
-    data.producers.split(',').forEach(function(prod){ 
-        console.log('aaaa', prod);
-        producers.push(prod.trim())
+    data.producers.split(',').forEach(function (prod) {
+      console.log('prod', prod);
+      producers.push(prod.trim())
     });
-    console.log(22, account, producers);
     const result = await votingCtl.vote(account, producers, data.proxy);
     if (!_.isEmpty(result)) res.send(JSON.stringify(result));
   } catch (error) {

@@ -7,7 +7,7 @@ const logger = require('morgan');
 const indexRouter = require('./routes/index');
 const votingRouter = require('./routes/voting');
 const settingRouter = require('./routes/setting');
-// onst producersRouter = require('./routes/producers');
+const accountRouter = require('./routes/account');
 
 const app = express();
 
@@ -26,12 +26,12 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/api/setting', settingRouter);
 app.use('/api/voting', votingRouter);
+app.use('/api/account', accountRouter);
+
 // 1.set chainID , EndPoint, accountName, save them
 // 2.query account info with accountName
 // 3.voting
 
-// app.user('/api/prducers', )
-//app.user('/api/account',) 
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

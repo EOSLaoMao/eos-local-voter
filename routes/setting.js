@@ -5,7 +5,6 @@ const util = require('util')
 const router = express.Router();
 const configFile = './config.json';
 const utils = require('../utils');
-const SetingCtl =
 
 router.post('/', async (req, res, next) => {
   const data = req.body;
@@ -23,20 +22,8 @@ router.get('/', async (req, res, next) => {
   try {
     config = utils.readConfig();
     res.send(config);
-  }
-  catch(error) {
+  } catch (error) {
     res.sendStatus(404)
   }
 })
-
-async function sendTransaction(eos, netToUnstake, cpuToUnstake, account) {
-  return await eos.transaction(tr => {
-    tr.undelegatebw({
-      from: account,
-      receiver: account,
-      unstake_net_quantity: netToUnstake,
-      unstake_cpu_quantity: cpuToUnstake,
-    })
-  })
-}
 module.exports = router;
