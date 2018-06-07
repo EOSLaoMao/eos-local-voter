@@ -9,21 +9,20 @@ const SetingCtl =
 
 router.post('/', async (req, res, next) => {
   const data = req.body;
-  const eosConfig = {
+  const config = {
     httpEndpoint: data.httpEndpoint,
     chainId: data.chainId,
     account: data.account,
   }
-  console.log(eosConfig);
-  utils.writeConfig(eosConfig);
-  // const eos = EOS(eosConfig);
-  res.sendStatus(200)
+  console.log(config);
+  utils.writeConfig(config);
+  res.send(config);
 });
 
 router.get('/', async (req, res, next) => {
   try {
     config = utils.readConfig();
-    res.send(JSON.stringify(config));
+    res.send(config);
   }
   catch(error) {
     res.sendStatus(404)
