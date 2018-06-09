@@ -9,7 +9,7 @@ var app = require('../app');
 var debug = require('debug')('eos-local-voter:server');
 var http = require('http');
 var utils = require('../utils');
-var localIp = utils.getLocalIp();
+// var localIp = utils.getLocalIp();
 
 /**
  * Get port from environment and store in Express.
@@ -28,7 +28,8 @@ var server = http.createServer(app);
  * Listen on provided port, on all network interfaces.
  */
 
-server.listen(port, localIp);
+//server.listen(port, localIp);
+server.listen(port);
 server.on('error', onError);
 server.on('listening', onListening);
 
@@ -90,6 +91,6 @@ function onListening() {
     ? 'pipe ' + addr
     : 'port ' + addr.port;
   debug('Listening on ' + bind);
-  url = "http://" + addr.address + ":" + addr.port;
-  opn(url, {app: ['google chrome', '--incognito']});
+  // url = "http://" + addr.address + ":" + addr.port;
+  // opn(url, {app: ['google chrome', '--incognito']});
 }
