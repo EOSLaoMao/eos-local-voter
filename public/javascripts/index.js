@@ -26,9 +26,9 @@ function updateAccount() {
     statusCode: {
       200: function(res) {
         console.log(res);
-        console.log(res['delegated_bandwidth'])
+        console.log(res['self_delegated_bandwidth'])
         console.log(res['voter_info']['producers'])
-        var delegated = res['delegated_bandwidth']
+        var delegated = res['self_delegated_bandwidth']
         var from = delegated['from']
         var to = delegated['to']
         var staking = [from, " --> ", to, ' CPU:', delegated['cpu_weight'], ' NET:', delegated['net_weight']];
