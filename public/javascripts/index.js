@@ -112,6 +112,7 @@ $('.btn-cancel').click(function(){
 
 $('#btn-save').click(function(){
   var data = formDataToObject('#form-config');
+  data['httpEndpoint'] = data['httpEndpoint'].replace(/\/$/, "");
   $.ajax({
     url: settingAPI,
     data: data,
