@@ -7,10 +7,17 @@ $.ajax({
   statusCode: {
       200: function(res) {
           // console.log('success', res); renderConfig(res);
+          renderConfig(res);
+          updateAccount();
           togglePage('display');
       },
       404: function(res) {
           togglePage('config');
+      },
+      500: function(res) {
+        alert('cannot fetch the account info, please make sure httpEndPoint and account name is correct')
+        togglePage('config');
+        console.log('failed', res);
       }
   }
 })
@@ -36,7 +43,13 @@ function updateAccount() {
         }
       },
       404: function(res) {
-        alert('cannot fetch the account info, please make sure endPoint and account name is correct')
+        alert('cannot fetch the account info, please make sure httpEndPoint and account name is correct')
+        togglePage('config');
+        console.log('failed', res);
+      },
+      500: function(res) {
+        alert('cannot fetch the account info, please make sure httpEndPoint and account name is correct')
+        togglePage('config');
         console.log('failed', res);
       }
     }
@@ -71,7 +84,6 @@ function renderConfig(res) {
   $('input.httpEndpoint').val(res.httpEndpoint);
   $('input.chainId').val(res.chainId);
   $('input.account').val(res.account);
-  updateAccount();
 }
 
 function formDataToObject(form) {
@@ -95,6 +107,7 @@ $('#btn-update-vote').click(function(){
 
 $('.btn-cancel').click(function(){
   togglePage('display');
+  updateAccount();
 })
 
 $('#btn-save').click(function(){
@@ -106,6 +119,7 @@ $('#btn-save').click(function(){
   }).done(function(res){
     // console.log('res:', res);
     renderConfig(res);
+    updateAccount();
     togglePage('display');
   })
 })
