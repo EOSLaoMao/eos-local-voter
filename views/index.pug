@@ -38,7 +38,8 @@ html
                   name="account")
 
         div.control
-          a(class='button is-dark', href='javascript:;' id="btn-save") Save
+          a(class='button is-primary', href='javascript:;' id="btn-save") save
+          a(class='button is-light btn-cancel', href='javascript:;' style='margin-left: 20px') cancel
 
 
       div(id="config-container")
@@ -69,29 +70,25 @@ html
               class="token has-text-black is-size-5")
 
         div.control
-          a(class='button is-size-6', href='javascript:;' id="btn-edit") update
+          a(class='button is-size-6', href='javascript:;' id="btn-edit") switch account
 
       hr
+
+
       form(class="form-vote"
            id="form-vote")
-        p(class="is-size-5 has-text-centered") Specify the producers you want to vote for
-
-        div.field
-          label Producers you voted for:
-          div.control
-            p(id="producers"
-              class="producers has-text-black is-size-5")
+        p(class="is-size-5 has-text-centered") Vote producers
 
 
-        div.field
-          label(for='producers') Producers(seperate by space):
+        div.field.producer-voter
+          label(for='producers') Specify Producers you want to vote(seperate by space):
           div.control
           textarea(type="text"
                    class="textarea"
                    placeholder="producer names seperated by space: producer1 producer2 producer3"
                    name="producers")
 
-        div.field
+        div.field.producer-voter
           label(for='secretKey') secretKey:
           div.control
           textarea(type="text"
@@ -99,14 +96,26 @@ html
                    class="textarea"
                    name="secretKey")
 
-        div.control
-          a(class='button is-primary', href='javascript:;' id="btn-vote") Vote!!
+        div.control.producer-voter
+          a(class='button is-primary', href='javascript:;' id="btn-vote") vote!!
+          a(class='button is-light btn-cancel', href='javascript:;' style='margin-left: 20px') cancel
+
+      form(class="vote-container"
+           id="vote-container")
+        p(class="is-size-5 has-text-centered") Vote status
+
+        div.field.producer-voted
+          label Producers you voted for:
+          div.control
+            p(id="producers"
+              class="producers has-text-black is-size-5")
+
+        div.control.producer-voted
+          a(class='button is-size-6', href='javascript:;' id="btn-update-vote") change vote
+
       hr
       div
-        p 
-          | created by 
-          a(href="https://eoslaomao.com") EosLaoMao
-          |  with ❤️
+        p created by EosLaoMao.com with ❤️
         
 
     script(src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js')

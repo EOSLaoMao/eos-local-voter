@@ -6,16 +6,11 @@ $.ajax({
   url: settingAPI,
   statusCode: {
       200: function(res) {
-          console.log('success', res);
-          $('#form-config').hide();
-          $('#config-container').show();
-          renderConfig(res);
-          $('#form-vote').show();
+          console.log('success', res); renderConfig(res);
+          togglePage('display');
       },
       404: function(res) {
-          $('#form-config').show();
-          $('#config-container').hide();
-          $('#form-vote').hide();
+          togglePage('config');
       }
   }
 })
@@ -31,16 +26,39 @@ function updateAccount() {
         var delegated = res['self_delegated_bandwidth']
         var from = delegated['from']
         var to = delegated['to']
-        var staking = [from, " --> ", to, ' CPU:', delegated['cpu_weight'], ' NET:', delegated['net_weight']];
-        $('p.token').text(staking.join(' '));
-        $('p.producers').text(res['voter_info']['producers'].join(' '));
-        
+        var staking = [from, " --> ", to, '<br>CPU:', delegated['cpu_weight'], '<br>NET:', delegated['net_weight']];
+        $('p.token').html(staking.join(' '));
+        if (res['voter_info']['producers'].length) {
+          $('p.producers').text(res['voter_info']['producers'].join(' '));
+          $('textarea[name="producers"]').val(res['voter_info']['producers'].join(' '));
+        } else {
+          $('p.producers').text("Not voted for any Producer");
+        }
       },
       404: function(res) {
         console.log('failed', res);
       }
     }
   })
+}
+
+function togglePage(page) {
+  if(page == 'config') {
+    $('#form-config').show();
+    $('#form-vote').hide();
+    $('#config-container').hide();
+    $('#vote-container').hide();
+  } else if(page == "display") {
+    $('#form-config').hide();
+    $('#form-vote').hide();
+    $('#config-container').show();
+    $('#vote-container').show();
+  } else if(page == "vote") {
+    $('#form-config').hide();
+    $('#form-vote').show();
+    $('#config-container').show();
+    $('#vote-container').hide();
+  }
 }
 
 function renderConfig(res) {
@@ -56,45 +74,51 @@ function renderConfig(res) {
 }
 
 function formDataToObject(form) {
-    var data = {};
-    var formData = $(form).serializeArray();
-    console.log('data:', data);
-    $.each(formData, function(index, item){
-      console.log(index, item);
-      data[item.name] = item.value;
-    });
-    return data;
+  var data = {};
+  var formData = $(form).serializeArray();
+  console.log('data:', data);
+  $.each(formData, function(index, item){
+    console.log(index, item);
+    data[item.name] = item.value;
+  });
+  return data;
 }
 
 $('#btn-edit').click(function(){
-    $('#form-config').show();
-    $('#config-container').hide();
-    $('#form-vote').hide();
+  togglePage('config');
+})
+
+$('#btn-update-vote').click(function(){
+  togglePage('vote');
+})
+
+$('.btn-cancel').click(function(){
+  togglePage('display');
 })
 
 $('#btn-save').click(function(){
-    var data = formDataToObject('#form-config');
-    $.ajax({
-      url: settingAPI,
-      data: data,
-      method: 'POST'
-    }).done(function(res){
-      console.log('res:', res);
-      renderConfig(res);
-      $('#form-config').hide();
-      $('#config-container').show();
-      $('#form-vote').show();
-    })
+  var data = formDataToObject('#form-config');
+  $.ajax({
+    url: settingAPI,
+    data: data,
+    method: 'POST'
+  }).done(function(res){
+    console.log('res:', res);
+    renderConfig(res);
+    togglePage('display');
+  })
 })
 
 
 $('#btn-vote').click(function(){
-    var data = formDataToObject('#form-vote');
-    $.ajax({
-      url: votingAPI,
-      data: data,
-      method: 'POST'
-    }).done(function(res){
-      console.log('res:', res);
-    })
+  var data = formDataToObject('#form-vote');
+  $.ajax({
+    url: votingAPI,
+    data: data,
+    method: 'POST'
+  }).done(function(res){
+    console.log('res:', res);
+    updateAccount();
+    togglePage('display');
+  })
 })
