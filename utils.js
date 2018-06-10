@@ -8,8 +8,19 @@ writeConfig = function(config) {
 }
 
 readConfig = function() {
-  let config = JSON.parse(fs.readFileSync(configFile, 'utf8'));
-  return config;
+  if (fs.existsSync(configFile)) {
+    let config = JSON.parse(fs.readFileSync(configFile, 'utf8'));
+    console.log("file does exists!")
+    return config;
+  } else {
+    let config = "";
+    console.log("file does not exists!")
+    fs.writeFile(configFile, "", (err) => {
+        if (err) throw err;
+        console.log("The file was succesfully saved!");
+    });
+    throw new Error("config file does not exist!");
+  }
 }
 
 getLocalIp = function() {
