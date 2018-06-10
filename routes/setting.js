@@ -13,13 +13,11 @@ router.post('/', async (req, res, next) => {
     chainId: data.chainId,
     account: data.account,
   }
-  console.log(config);
   utils.writeConfig(config);
   res.send(config);
 });
 
 router.get('/', async (req, res, next) => {
-  console.log('local ip:', utils.getLocalIp());
   try {
     config = utils.readConfig();
     res.send(config);

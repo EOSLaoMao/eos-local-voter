@@ -68,12 +68,6 @@ html
             p(id="token"
               class="token has-text-black is-size-5")
 
-        div.field
-          label(for='producers') Producers you voted for:
-          div.control
-            p(id="producers"
-              class="producers has-text-black is-size-5")
-
         div.control
           a(class='button is-size-6', href='javascript:;' id="btn-edit") update
 
@@ -81,6 +75,13 @@ html
       form(class="form-vote"
            id="form-vote")
         p(class="is-size-5 has-text-centered") Specify the producers you want to vote for
+
+        div.field
+          label Producers you voted for:
+          div.control
+            p(id="producers"
+              class="producers has-text-black is-size-5")
+
 
         div.field
           label(for='producers') Producers(seperate by space):
