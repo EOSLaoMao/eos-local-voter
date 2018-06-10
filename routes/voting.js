@@ -18,7 +18,7 @@ router.post('/', async (req, res, next) => {
     if (_.isEmpty(data.proxy)) data.proxy = "";
     let producers = [];
     data.producers.split(' ').forEach(function (prod) {
-      console.log('prod', prod);
+      // console.log('prod', prod);
       producers.push(prod.trim())
     });
     const result = await votingCtl.vote(account, producers, data.proxy);

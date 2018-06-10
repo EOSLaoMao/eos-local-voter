@@ -6,7 +6,7 @@ $.ajax({
   url: settingAPI,
   statusCode: {
       200: function(res) {
-          console.log('success', res); renderConfig(res);
+          // console.log('success', res); renderConfig(res);
           togglePage('display');
       },
       404: function(res) {
@@ -20,9 +20,9 @@ function updateAccount() {
     url: accountAPI,
     statusCode: {
       200: function(res) {
-        console.log(res);
-        console.log(res['self_delegated_bandwidth'])
-        console.log(res['voter_info']['producers'])
+        // console.log(res);
+        // console.log(res['self_delegated_bandwidth'])
+        // console.log(res['voter_info']['producers'])
         var delegated = res['self_delegated_bandwidth']
         var from = delegated['from']
         var to = delegated['to']
@@ -36,6 +36,7 @@ function updateAccount() {
         }
       },
       404: function(res) {
+        alert('cannot fetch the account info, please make sure endPoint and account name is correct')
         console.log('failed', res);
       }
     }
@@ -76,9 +77,9 @@ function renderConfig(res) {
 function formDataToObject(form) {
   var data = {};
   var formData = $(form).serializeArray();
-  console.log('data:', data);
+  // console.log('data:', data);
   $.each(formData, function(index, item){
-    console.log(index, item);
+    // console.log(index, item);
     data[item.name] = item.value;
   });
   return data;
@@ -103,7 +104,7 @@ $('#btn-save').click(function(){
     data: data,
     method: 'POST'
   }).done(function(res){
-    console.log('res:', res);
+    // console.log('res:', res);
     renderConfig(res);
     togglePage('display');
   })
@@ -117,7 +118,8 @@ $('#btn-vote').click(function(){
     data: data,
     method: 'POST'
   }).done(function(res){
-    console.log('res:', res);
+    $('textarea[name="secretKey"]').val('');
+    // console.log('res:', res);
     updateAccount();
     togglePage('display');
   })
