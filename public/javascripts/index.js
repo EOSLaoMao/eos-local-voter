@@ -31,6 +31,11 @@ function updateAccount() {
         // console.log(res['self_delegated_bandwidth'])
         // console.log(res['voter_info']['producers'])
         var delegated = res['self_delegated_bandwidth']
+        if(delegated == null) {
+          alert('this account have no delegated tokens, please use another account!');
+          togglePage('config');
+          return
+        }
         var from = delegated['from']
         var to = delegated['to']
         var staking = [from, " --> ", to, '<br>CPU:', delegated['cpu_weight'], '<br>NET:', delegated['net_weight']];
