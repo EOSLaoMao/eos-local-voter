@@ -13,12 +13,14 @@
 * Import key: `cleos import [privateKey]`
 ![](./Docker/images/01-importkey.png)
 
-* Get account info: `cleos get account [accountName]` to check your account info 
-
 * Get blockchain status: `cleos get info` 
 ![](./Docker/images/02-getchaininfo.png)
- 
-* Voting: After head block number reach the latest, you can vote with this command `cleos system voteproducer prods [bpName]`
 
-* Check voting staus: `cleos get account [accountName] ` to check vote status
+* Wait head block number reach the latest. https://explorer.eoseco.com/
+
+* Get account info: `cleos get account [accountName]` to check your account info 
+ 
+* Voting: `cleos system voteproducer prods [bpName]`
+
+* Check voting staus: `cleos get account [accountName] ` to check voting status
 ![](./Docker/images/03-votinginfo.png)
