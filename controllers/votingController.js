@@ -4,6 +4,8 @@ class VotingCtl {
     }
 
     async vote(voter, producers, proxy) {
+        // sort producer list
+        producers.sort();
         return await this.eos.transaction(tr => {
             tr.voteproducer({
                 voter: voter,
